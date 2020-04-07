@@ -1,18 +1,28 @@
 import React from "react";
+import {register} from './service/auth';
 
 export class Register extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            login: '',
-            password: '',
-            repeatPassword: ''
+            name: '',
+            email: '',
+            password: ''
         };
     }
 
     onClick = () => {
         console.log('[obabichev] submit form');
+        register(this.state)
+            .then((data) => {
+                console.log('[obabichev] data', data);
+                localStorage.setItem('AUTH', JSON.stringify(data));
+                this.props.auth(data);
+            })
+            .catch(error => {
+                console.log('[obabichev] error', error);
+            })
     };
 
     onChange = (event) => {
@@ -22,25 +32,26 @@ export class Register extends React.Component {
     };
 
     render() {
+        console.log('[obabichev] this.props', this.props);
         return (
             <div>
                 <div>
                     <span>
-                        Login
+                        Name
                     </span>
-                    <input name="login" value={this.state.login} onChange={this.onChange}/>
+                    <input name="name" value={this.state.name} onChange={this.onChange}/>
+                </div>
+                <div>
+                    <span>
+                        Email
+                    </span>
+                    <input name="email" value={this.state.email} onChange={this.onChange}/>
                 </div>
                 <div>
                     <span>
                         Password
                     </span>
                     <input name="password" value={this.state.password} onChange={this.onChange}/>
-                </div>
-                <div>
-                    <span>
-                        Repeat password
-                    </span>
-                    <input name="repeatPassword" value={this.state.repeatPassword} onChange={this.onChange}/>
                 </div>
                 <button onClick={this.onClick}>Click me</button>
             </div>

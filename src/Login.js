@@ -11,7 +11,7 @@ export class Login extends React.Component {
     }
 
     onClick = () => {
-        localStorage.setItem('AUTH', "AUTH");
+        // localStorage.setItem('AUTH', "AUTH");
     };
 
     onChange = (event) => {
