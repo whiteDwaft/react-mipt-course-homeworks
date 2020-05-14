@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {PageWrapper} from '../PageWrapper';
-import {createBoard} from '../../service/boards';
+import {createBoard} from '../../service/fetchBoards';
 import {withLoading} from '../../hocs/withLoading';
 
 class CreateBoardPageComponent extends Component {

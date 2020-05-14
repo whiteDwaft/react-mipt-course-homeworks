@@ -1,42 +1,28 @@
-import React from 'react';
-import {boards} from '../../service/boards';
-import {withLoading} from '../../hocs/withLoading';
+import React, {useEffect, useState} from 'react';
+import {getBoards} from '../../service/fetchBoards';
 import {PageWrapper} from '../PageWrapper';
+import {useLoading} from '../../Dashboard';
 
-class BoardsPageComponent extends React.Component {
+const BoardsPageComponent = () => {
+    const [fetchBoards, loading, boards] = useLoading(() => {
+        return getBoards();
+    });
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            boards: [],
-        }
-    }
-
-    componentDidMount() {
-        const {execute} = this.props;
-
-        execute(boards)()
-            .then(boards => {
-                this.setState({boards});
-            })
+    useEffect(() => {
+        fetchBoards()
             .catch(error => {
                 console.log(error);
             })
-    }
+    }, []);
 
-    render() {
-        const {boards} = this.state;
-        const {loading, error} = this.props;
-        return <PageWrapper loading={loading} error={error}>
-            <h2>Boards</h2>
-            {boards.map(board => {
-                return (<div>
-                    {board.title}
-                </div>)
-            })}
-        </PageWrapper>;
-    }
-}
+    return <PageWrapper loading={loading} error={null}>
+        <h2>Boards</h2>
+        {(boards || []).map(board => {
+            return (<div>
+                {board.title}
+            </div>)
+        })}
+    </PageWrapper>;
+};
 
-export const BoardsPage = withLoading(BoardsPageComponent);
+export const BoardsPage = BoardsPageComponent;

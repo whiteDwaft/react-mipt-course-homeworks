@@ -5,6 +5,8 @@ import {BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom
 import {Dashboard} from "./Dashboard";
 import {BoardsPage} from './components/board/BoardsPage';
 import {CreateBoardPage} from './components/board/CreateBoardPage';
+import {Provider} from 'react-redux';
+import {store} from './store';
 
 
 const withAuth = (Component, auth) => {
@@ -33,22 +35,24 @@ class App extends React.Component {
         const {tokens} = this.state;
         return (
             <div>
-                <h2>
-                    My App
-                </h2>
-                <Router>
-                    {!tokens && <Switch>
-                        <Route path="/login" component={Login}/>
-                        <Route path="/register" component={withAuth(Register, this.auth)}/>
-                        <Redirect to="/login"/>
-                    </Switch>}
-                    {!!tokens && <Switch>
-                        <Route exact path="/" component={Dashboard}/>
-                        <Route exact path="/boards" component={BoardsPage}/>
-                        <Route exact path="/create-board" component={CreateBoardPage}/>
-                        <Redirect to="/"/>
-                    </Switch>}
-                </Router>
+                <Provider store={store}>
+                    <h2>
+                        My App
+                    </h2>
+                    <Router>
+                        {!tokens && <Switch>
+                            <Route path="/login" component={Login}/>
+                            <Route path="/register" component={withAuth(Register, this.auth)}/>
+                            <Redirect to="/login"/>
+                        </Switch>}
+                        {!!tokens && <Switch>
+                            <Route exact path="/" component={Dashboard}/>
+                            <Route exact path="/boards" component={BoardsPage}/>
+                            <Route exact path="/create-board" component={CreateBoardPage}/>
+                            <Redirect to="/"/>
+                        </Switch>}
+                    </Router>
+                </Provider>
             </div>
         );
     }
