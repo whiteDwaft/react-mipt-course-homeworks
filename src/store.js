@@ -1,24 +1,25 @@
-import {combineReducers, createStore} from 'redux';
+import {applyMiddleware, compose, createStore} from 'redux';
+import {rootReducer} from './reducers';
+import thunk from 'redux-thunk';
 
-const users = (state = [], action) => {
-    return state;
+const loggerMiddleware = ({dispatch, getState}) => next => action => {
+    console.log('[obabichev] LOGGER MIDDLEWARE action', action);
+    // store.dispatch, store.getState
+
+    return next(action);
 };
 
-const boards = (state = [], action) => {
-    switch (action.type) {
-        case 'GET_BOARDS': {
-            // console.log('[obabichev] aciton', action);
-            return action.payload;
-        }
-        default:
-            return state;
-    }
-};
-
-const rootReducer = combineReducers({
-    users,
-    boards
-});
+// action -> middleware(action) -> middleware2(acton) -> reducer(action)
 
 
-export const store = createStore(rootReducer);
+const middlewares = applyMiddleware(loggerMiddleware, thunk);
+
+const enhancer = compose(
+    middlewares,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
+export const store = createStore(
+    rootReducer,
+    enhancer
+);

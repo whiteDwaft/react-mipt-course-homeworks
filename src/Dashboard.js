@@ -33,7 +33,6 @@ const wait = async () => {
 
 export const Dashboard = () => {
     const boards = useSelector((state) => {
-        console.log('[obabichev] useSelector:state', state);
         return state.boards
     });
 

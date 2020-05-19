@@ -25,7 +25,6 @@ class CreateBoardPageComponent extends Component {
     onClick = () => {
         createBoard(this.state)
             .then(result => {
-                console.log('[obabichev] result', result);
             })
             .catch(error => {
                 console.log('[obabichev] error', error)

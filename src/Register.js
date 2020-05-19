@@ -13,10 +13,8 @@ export class Register extends React.Component {
     }
 
     onClick = () => {
-        console.log('[obabichev] submit form');
         register(this.state)
             .then((data) => {
-                console.log('[obabichev] data', data);
                 localStorage.setItem('AUTH', JSON.stringify(data));
                 this.props.auth(data);
             })
@@ -32,7 +30,6 @@ export class Register extends React.Component {
     };
 
     render() {
-        console.log('[obabichev] this.props', this.props);
         return (
             <div>
                 <div>

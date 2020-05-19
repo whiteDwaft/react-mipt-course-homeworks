@@ -1,18 +1,17 @@
-import React, {useEffect, useState} from 'react';
-import {getBoards} from '../../service/fetchBoards';
+import React, {useEffect} from 'react';
 import {PageWrapper} from '../PageWrapper';
-import {useLoading} from '../../Dashboard';
+import {useDispatch, useSelector} from 'react-redux';
+import {fetchBoards, fetchBoardsAction} from '../../reducers/boards';
+import {LOADERS} from '../../reducers/loading';
 
 const BoardsPageComponent = () => {
-    const [fetchBoards, loading, boards] = useLoading(() => {
-        return getBoards();
-    });
+    const boards = useSelector((state) => state.boards);
+    const loading = useSelector(state => state.loading[LOADERS.FETCH_BOARDS]);
+    const dispatch = useDispatch(); //store.dispatch()
+    console.log('[obabichev] boards', boards);
 
     useEffect(() => {
-        fetchBoards()
-            .catch(error => {
-                console.log(error);
-            })
+        dispatch(fetchBoardsAction())
     }, []);
 
     return <PageWrapper loading={loading} error={null}>
