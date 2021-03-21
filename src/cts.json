@@ -1,0 +1,22 @@
+{
+  "category": {
+    "key": "hr",
+    "value": "HR"
+  },
+  "icon": {
+    "key": "9",
+    "value": "/images/board-logo/9.svg"
+  },
+  "tasks": [],
+  "_id": "60327db9fd8328001d0360ff",
+  "title": "Cats",
+  "key": "CTS",
+  "owner": {
+    "_id": "60327959fd8328001d0360fb",
+    "name": "obabichev",
+    "email": "babichev.oleg.n@gmail.com",
+    "oauth": "google",
+    "__v": 0
+  },
+  "__v": 0
+}

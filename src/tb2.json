@@ -1,0 +1,22 @@
+{
+  "category": {
+    "key": "revenue",
+    "value": "Revenue"
+  },
+  "icon": {
+    "key": "10",
+    "value": "/images/board-logo/10.svg"
+  },
+  "tasks": [],
+  "_id": "6032796ffd8328001d0360fd",
+  "title": "Test board 2",
+  "key": "TB2",
+  "owner": {
+    "_id": "60327959fd8328001d0360fb",
+    "name": "obabichev",
+    "email": "babichev.oleg.n@gmail.com",
+    "oauth": "google",
+    "__v": 0
+  },
+  "__v": 0
+}
